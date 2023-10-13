@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const number=[5,2,3,1,4,9,6]
+        function descendingOrder(a){
+            for (let i = 0; i < a.length; i++) 
+            {
+              for (let j = i+1; j < a.length; j++) {
+                if(a[i]>a[j])
+                {
+                    const temp=a[i];
+                    a[i]=a[j];
+                    a[j]=temp
+                } 
+              }   
+            }
+        }
+        descendingOrder(number)
+        document.writeln(number)
+    </script>
+</body>
+</html>

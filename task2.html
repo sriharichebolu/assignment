@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Survey Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #container {
+            border: 2px solid black;
+            width: 350px;
+            height: 450px;
+            background-color: whitesmoke;
+            position: relative;
+            bottom: -20px;
+        }
+
+        label {
+            font-size: 25px;
+        }
+
+        #main {
+            background-color: cadetblue;
+            width: 1050px;
+            height: 550px;
+            position: relative;
+            left: 250px;
+        }
+
+        #popup {
+            display: none;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+        }
+
+        .popup-content {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <center>
+            <h1>Customer Survey Form</h1>
+        </center>
+        <center>
+            <div id="container">
+                <br>
+                <form id="surveyform">
+                    <label>FirstName :</label>
+                    <input type="text" required id="firstname"><br><br>
+                    <label>LastName :</label>
+                    <input type="text" required id="lastname"><br><br>
+                    <label style="position: relative;right: 5px;">Date Of Birth :</label>
+                    <input type="date" required style="font-size: 15px;" id="dob"><br><br>
+                    <label style="position: relative;right: 16px;">Country :</label>
+                    <select style="font-size: 20px;position: relative;left: 11px;" id="country">
+                        <option>-select Country-</option>
+                        <option>India</option>
+                        <option>Australia</option>
+                        <option>Brazil</option>
+                        <option>America</option>
+                        <option>Russia</option>
+                        <option>Pakistan</option>
+                    </select><br><br>
+                    <label style="position: relative;right: 7px;">Gender :</label>
+                    <input type="radio" value="male" name="gender" id="male">Male&nbsp;&nbsp;&nbsp;
+                    <input type="radio" value="female" name="gender" id="female">Female&nbsp;&nbsp;&nbsp;
+                    <input type="radio" value="others" name="gender" id="other">Others<br><br>
+                    <label>Profession :</label>
+                    <input type="text" required id="profession"><br><br>
+                    <label style="position: relative;right: 23px;">Email :</label>
+                    <input type="email" required style="position: relative;left: 22px;" id="mail"><br><br>
+                    <label style="position: relative;right: 19px;">Mobile :</label>
+                    <input type="number" required style="position: relative;left: 16px;" id="mob"><br><br>
+                    <input type="submit" style="font-size: 20px; background-color: blue; color: white; width: 85px;" value="Submit">
+                    <input type="button" style="background-color: red; color: white; font-size: 20px; width: 80px;" value="Reset" onclick="resetForm()">
+                </form>
+            </div>
+        </center>
+    </div>
+
+    <div id="popup">
+        <div class="popup-content">
+            <h2>Submitted Values</h2>
+            <p><strong>FirstName :</strong><span id="displayfirstname"></span></p>
+            <p><strong>LastName :</strong><span id="displaylastname"></span></p>
+            <p><strong>Date of Birth :</strong><span id="displayDateofbirth"></span></p>
+            <p><strong>Country :</strong><span id="displaycountry"></span></p>
+            <p><strong>Gender :</strong><span id="displaygender"></span></p>
+            <p><strong>Profession :</strong><span id="displayprofession"></span></p>
+            <p><strong>Email :</strong><span id="displaymail"></span></p>
+            <p><strong>Mobile :</strong><span id="displaymobile"></span></p>
+            <input type="button" value="Close" onclick="closePopup()">
+        </div>
+    </div>
+
+    <script>
+        function submitForm() {
+            var firstName = document.getElementById("firstname").value;
+            var lastname = document.getElementById("lastname").value;
+            var Dateofbirth = document.getElementById("dob").value;
+            var country = document.getElementById("country").value;
+            var genderElements = document.querySelectorAll('input[name="gender"]:checked');
+            var gender = [];
+            for (var i = 0; i < genderElements.length; i++) {
+                gender.push(genderElements[i].value);
+            }
+            var profession = document.getElementById("profession").value;
+            var email = document.getElementById("mail").value;
+            var mobile = document.getElementById("mob").value;
+
+            document.getElementById("displayfirstname").textContent = firstName;
+            document.getElementById("displaylastname").textContent = lastname;
+            document.getElementById("displayDateofbirth").textContent = Dateofbirth;
+            document.getElementById("displaycountry").textContent = country;
+            document.getElementById("displaygender").textContent = gender.join(", ");
+            document.getElementById("displayprofession").textContent = profession;
+            document.getElementById("displaymail").textContent = email;
+            document.getElementById("displaymobile").textContent = mobile;
+
+            document.getElementById("popup").style.display = "block";
+        }
+
+        function resetForm() {
+            document.getElementById("surveyform").reset();
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+
+        document.getElementById("surveyform").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the form from submitting
+            submitForm(); // Call your custom submit function to display the popup
+        });
+    </script>
+</body>
+</html>
